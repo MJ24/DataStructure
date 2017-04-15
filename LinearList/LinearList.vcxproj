@@ -112,6 +112,7 @@
   <ItemGroup>
     <ClInclude Include="LinearListBase.h" />
     <ClInclude Include="SequenceListByArray.h" />
+    <ClInclude Include="SingleLinkList.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />

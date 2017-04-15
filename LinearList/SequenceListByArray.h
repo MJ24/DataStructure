@@ -1,4 +1,4 @@
-// 线性表的实现类-->泛型数组实现的顺序表
+// 线性表的实现类 --> 泛型数组实现的顺序表
 
 #ifndef SEQUENCELISTBYARRAY_H
 #define SEQUENCELISTBYARRAY_H

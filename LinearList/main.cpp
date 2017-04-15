@@ -1,6 +1,7 @@
 #include <iostream>
 #include "LinearListBase.h"
 #include "SequenceListByArray.h"
+#include "SingleLinkList.h"
 using namespace std;
 
 template <typename ElemType>
@@ -11,7 +12,14 @@ int main()
 {
 	SequenceListByArray<int> intSl;
 	LinearListBase<int>& intLl = intSl;
+
+	SingleLinkList<int> intSll;
+	LinearListBase<int>& intLll = intSll;
+
+	cout << "********  By SequenceList:  ********\n";
 	testIntLl(intSl);
+	cout << "\n********  By SingleLinkList:  ********\n";
+	testIntLl(intSll);
 	system("pause");
 	return 0;
 }

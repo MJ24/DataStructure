@@ -1,4 +1,4 @@
-// 抽象基类-->线性表
+// 抽象基类 --> 线性表
 
 #ifndef LINEARLISTBASE_H
 #define LINEARLISTBASE_H
