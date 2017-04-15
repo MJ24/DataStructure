@@ -23,7 +23,7 @@ public:
 
 	void clear() override { last = -1; }
 
-	ElemType locate(int index) const override
+	ElemType& locate(int index) const override
 	{
 		ElemType result;
 		if (empty())

@@ -15,7 +15,8 @@ public:
 	// 清空线性表
 	virtual void clear() = 0;
 	// 查找下标为i的元素返回其值
-	virtual ElemType locate(int index) const = 0;
+	// 这里返回引用的意义在于和下标一样a[i]=0应该能直接改变a[i]的值
+	virtual ElemType& locate(int index) const = 0;
 	// 查找值为x的元素返回其下标
 	virtual int find(const ElemType &x) const = 0;
 	// 在下标为i的元素之前插入元素x
