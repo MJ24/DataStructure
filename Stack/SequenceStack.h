@@ -41,10 +41,18 @@ public:
 		return elem;
 	}
 
-	ElemType& locate(int index) const override
+	void print() const override
 	{
-		// index检查，非空检查等略过
-		return data[index];
+		if (empty())
+			cout << "栈为空！" << endl;
+		else
+		{
+			for (int i = 0; i < top - 1; i++)
+			{
+				cout << data[i] << ",";
+			}
+			cout << data[top] << endl;
+		}
 	}
 private:
 	ElemType *data;

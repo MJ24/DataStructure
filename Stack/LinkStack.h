@@ -42,8 +42,8 @@ public:
 	{
 		Node <ElemType> *newNode = new Node < ElemType > ;
 		newNode->data = elem;
-		newNode->next = top;
-		top = newNode;
+		newNode->next = top->next;
+		top->next = newNode;
 	}
 
 	ElemType pop() override
@@ -54,27 +54,30 @@ public:
 			cout << "栈为空！" << endl;
 			return ElemType();
 		}
-		elem = top->data;
-		top = top->next;
+		elem = top->next->data;
+		top->next = top->next->next;
 		return elem;
 	}
 
-	// 这里的locate是错误的仅仅是给后面遍历用
-	// 因为单链表的头结点才是top而不是尾节点，所以刚好相反
-	ElemType& locate(int index) const override
+	void print() const override
 	{
-		// index检查，非空检查等略过
-		int count = 0;
-		Node <ElemType> *p = top;
-		while (p->next && count < index)
+		if (empty())
+			cout << "栈为空！" << endl;
+		else
 		{
-			p = p->next;
-			++count;
+			cout << "从栈顶到栈底：";
+			Node <ElemType> *p = top->next;
+			while (p->next)
+			{
+				cout << p->data << ",";
+				p = p->next;
+			}
+			cout << p->data << endl;
 		}
-		return p->data;
 	}
 private:
 	// 注意因为为了方便pop操作，把top设置为单链表的头结点！
+	// 另外top结点为虚拟节点，top->next为栈顶元素
 	Node<ElemType> *top;
 };
 #endif

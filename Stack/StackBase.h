@@ -19,7 +19,7 @@ public:
 	// 出栈
 	virtual ElemType pop() = 0;
 
-	// 非必要接口，加之便于遍历输出stack
-	virtual ElemType& locate(int index) const = 0;
+	// 非必要接口，加之便于遍历输出
+	virtual void print() const = 0;
 };
 #endif

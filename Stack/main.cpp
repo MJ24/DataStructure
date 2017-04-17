@@ -4,16 +4,6 @@
 #include "LinkStack.h"
 using namespace std;
 
-template <typename ElemType>
-void printStack(const StackBase<ElemType> &sb)
-{
-	for (int i = 0; i < sb.size() - 1; i++)
-	{
-		cout << sb.locate(i) << ",";
-	}
-	cout << sb.locate(sb.size() - 1) << endl;
-}
-
 void testIntStack(StackBase<int> &isb)
 {
 	isb.pop();
@@ -22,11 +12,11 @@ void testIntStack(StackBase<int> &isb)
 	{
 		isb.push(i);
 	}
-	printStack(isb);
+	isb.print();
 	cout << isb.size() << endl;
 	cout << isb.pop() << endl;
 	cout << isb.pop() << endl;
-	printStack(isb);
+	isb.print();
 	cout << isb.size() << endl;
 }
 
@@ -34,10 +24,12 @@ int main()
 {
 	SequenceStack<int> iss;
 	StackBase<int> &isb = iss;
+	cout << "********  By SequenceStack:  ********\n";
 	testIntStack(isb);
 
 	LinkStack<int> ils;
 	StackBase<int> &isb2 = ils;
+	cout << "\n********  By LinkStack:  ********\n";
 	testIntStack(isb2);
 	system("pause");
 	return 0;
