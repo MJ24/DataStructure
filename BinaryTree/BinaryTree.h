@@ -1,6 +1,7 @@
 #pragma once
 #include "TreeNode.h"
 #include <stack>
+#include <queue>
 class BinaryTree
 {
 public:
@@ -63,6 +64,11 @@ public:
 		postOrder(root);
 		std::cout << "/";
 		postOrderPro(root);
+		std::cout << "\n";
+		std::cout << "层序遍历：\n";
+		levelOrder(root);
+		std::cout << "\n";
+		printLevelInfo(root);
 		std::cout << std::endl;
 	}
 private:
@@ -154,6 +160,52 @@ private:
 			stkPrint.pop();
 		}
 	}
+	void levelOrder(TreeNode *r) const
+	{
+		if (!r)
+			return;
+		std::queue<TreeNode*> que;
+		que.push(r);
+		while (!que.empty())
+		{
+			TreeNode *cur = que.front();
+			std::cout << cur->val;
+			if (cur->left)
+				que.push(cur->left);
+			if (cur->right)
+				que.push(cur->right);
+			que.pop();
+		}
+	}
+	void printLevelInfo(TreeNode *r) const
+	{
+		if (!r)
+			return;
+		std::queue<TreeNode*> que;
+		que.push(r);
+		int levelCount = 0; //层数
+		int levelWidth = 0; //当前层node个数
+		while (!que.empty())
+		{
+			++levelCount;
+			levelWidth = que.size();
+			std::cout << "当前为第" << levelCount << "层, 这层有"
+				<< levelWidth << "个node：" << std::endl;
+			// 遍历当前层，依次打印当前层的所有节点并将它们的左右儿子入队
+			for (int i = 0; i < levelWidth; i++)
+			{
+				TreeNode * cur = que.front();
+				que.pop();
+				std::cout << cur->val;
+				if (cur->left)
+					que.push(cur->left);
+				if (cur->right)
+					que.push(cur->right);
+			}
+			std::cout << "\n"; // 当前层遍历完毕
+		}
+		std::cout << "共" << levelCount << "层打印完毕。" << std::endl;
+	}
 	void printTreeImpl(TreeNode* n, bool left, std::string const& indent) const
 	{
 		if (n->right)
@@ -170,4 +222,3 @@ private:
 		}
 	}
 };
-
