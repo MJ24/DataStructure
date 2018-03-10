@@ -45,7 +45,7 @@ public:
 
 	bool empty() const override { return head == nullptr; }
 
-	void clear() override { head == nullptr; }
+	void clear() override { head = nullptr; }
 
 	ElemType& locate(int index) const override
 	{
