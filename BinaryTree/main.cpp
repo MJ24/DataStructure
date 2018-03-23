@@ -5,7 +5,9 @@ using namespace std;
 
 int main()
 {
-	BinaryTree bt;
+	/*BinaryTree bt;
+	bt.traverseTree();*/
+	BinaryTree bt("537619284");
 	bt.traverseTree();
 	system("pause");
 	return 0;

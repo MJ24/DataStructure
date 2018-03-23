@@ -9,6 +9,10 @@ public:
 	{
 		createSearchTree();
 	}
+	BinaryTree(const std::string &nodeVals)
+	{
+		createSearchTree(nodeVals);
+	}
 	BinaryTree(TreeNode *n) :root(n) {}
 	void createSearchTree()
 	{
@@ -32,6 +36,29 @@ public:
 				}
 			}
 			*parent = new TreeNode(n);
+		}
+	}
+	void createSearchTree(const std::string &nodeVals)
+	{
+		for (char nodeValChar : nodeVals)
+		{
+			int nodeVal = nodeValChar - '0';
+			TreeNode **parent = &root;
+			TreeNode *cur = root;
+			while (cur)
+			{
+				if (nodeVal < cur->val)
+				{
+					parent = &(cur->left);
+					cur = cur->left;
+				}
+				else
+				{
+					parent = &(cur->right);
+					cur = cur->right;
+				}
+			}
+			*parent = new TreeNode(nodeVal);
 		}
 	}
 	void printTree() const
