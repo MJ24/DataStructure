@@ -96,10 +96,40 @@ public:
 		levelOrder(root);
 		std::cout << "\n";
 		printLevelInfo(root);
+		std::cout << "\n";
+
+		int preArr[] = { 5,3,1,2,4,7,6,9,8 };
+		std::cout << "根据搜索二叉树的前序遍历结果构建二叉树并输出后序遍历结果：\n";
+		getPostByPre(preArr, 9);
 		std::cout << std::endl;
 	}
+	TreeNode* findNode(const int nodeVal, TreeNode *root) const
+	{
+		if (!root)
+			return nullptr;
+		if (nodeVal < root->val)
+			findNode(nodeVal, root->left);
+		else if (nodeVal > root->val)
+			findNode(nodeVal, root->right);
+		else
+			return root;
+	}
+	TreeNode* findNode(const int nodeVal) const
+	{
+		TreeNode *cur = root;
+		while (cur)
+		{
+			if (nodeVal < cur->val)
+				cur = cur->left;
+			else if (nodeVal > cur->val)
+				cur = cur->right;
+			else
+				return cur;
+		}
+		return nullptr;
+	}
 private:
-	TreeNode *root;
+	TreeNode * root;
 	void preOrder(TreeNode *r) const
 	{
 		if (!r)
@@ -247,5 +277,34 @@ private:
 		{
 			printTreeImpl(n->left, true, indent + (left ? "      " : "|     "));
 		}
+	}
+	//从前序遍历的结果数组arr构建二叉树，思想是先找到第一个大于arr[start]的下标rightChild
+	//那么[start+1, rightChild-1]是arr[start]的左子树，[rightChild, end]是其右子树
+	//对这两个区间递归调用此方法构造再下层的子树即可
+	void buidTreeByPreOrder(int *arr, int start, int end, TreeNode *root) const
+	{
+		if (start < end)
+		{
+			int rightChild = start + 1;
+			while (rightChild <= end && arr[rightChild] <= arr[start])
+				++rightChild;
+			if (rightChild > start + 1) // has left child
+			{
+				root->left = new TreeNode(arr[start + 1]);
+				buidTreeByPreOrder(arr, start + 1, rightChild - 1, root->left);
+			}
+			if (rightChild <= end) // has right child
+			{
+				root->right = new TreeNode(arr[rightChild]);
+				buidTreeByPreOrder(arr, rightChild, end, root->right);
+			}
+		}
+	}
+	void getPostByPre(int *preArr, int len) const
+	{
+		TreeNode* root = new TreeNode(preArr[0]);
+		buidTreeByPreOrder(preArr, 0, len - 1, root);
+		postOrderPro(root);
+		std::cout << "\n";
 	}
 };
